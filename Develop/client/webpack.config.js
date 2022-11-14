@@ -43,13 +43,34 @@ module.exports = () => {
 					{
 						src: path.resolve("src/images/logo.png"),
 						sizes: [96, 128, 192, 256, 384, 512],
+						destination: path.join("assets", "icons"),
 					},
 				],
 			}),
 		],
 
 		module: {
-			rules: [],
+			rules: [
+				{
+					test: /\.css$/i,
+					use: ["style-loader", "css-loader"],
+				},
+				{
+					test: /\/m?js$/,
+					exclude: /node_modules/,
+					// Babel-loader is used here in order to be able to use ES6
+					use: {
+						loader: "babel-loader",
+						options: {
+							presets: ["@babel/preset-env"],
+							plugins: [
+								"@babel/plugin-proposal-object-rest-spread",
+								"@babel/transform-runtime",
+							],
+						},
+					},
+				},
+			],
 		},
 	};
 };
