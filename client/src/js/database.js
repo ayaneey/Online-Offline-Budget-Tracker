@@ -37,7 +37,7 @@ export const getDb = async () => {
 	// GET confirmation of the request
 	const result = await request;
 	console.log("result.value", result);
-	return results;
+	return result?.value;
 };
 
 initdb();
